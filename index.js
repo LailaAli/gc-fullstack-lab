@@ -16,28 +16,27 @@ var pool = new pg.Pool({
     ssl: false
 });
 
-database.init([
-    {
-    product: "cereal",
-    price: 4.5
-},
-    {
-        product: "candy",
-        price: 2.5
-    }
-]);
 
-// respond with "Hello World!" on the homepage
-app.get("/api/", function (req, res) {
-    res.send(database.readAll());
+//Adding our first route
+app.get("/items", function (req, res) {
+    pool.query("SELECT * FROM items_table").then(function (result) {
+        res.send(result.rows);
+    });
 });
 
-app.post('/api/', function (req, res) {
-    database.create(req.body);
-    res.send("success!");
+app.post('/items', function (req, res) {
+    var newItem = req.body; // <-- Get the parsed JSON body
+    var sql = "INSERT INTO items_table(product, price) " +
+      "VALUES ($1::text, $2::numeric)";
+    var values = [newItem.product, newItem.price];
+  
+    pool.query(sql, values).then(function() {
+      res.status(201); // 201 Created
+      res.send("INSERTED");
+    });
 });
 
-app.delete('/api/', function (req, res) {
+app.delete('/items', function (req, res) {
     var i = 0;
     database.delete(database[i]);
     res.send(database.readAll());
