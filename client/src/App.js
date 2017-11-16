@@ -13,7 +13,9 @@ class App extends Component {
       }; 
 
     render() {
-        const { buyItems, message } = this.state;
+        const addNewItem  = this.props.item.map((item) => (
+            <AddNewItem key={item.id}item={item}/>
+        ));
         return (
             <div className="App">
                 <header> 
@@ -31,7 +33,7 @@ class App extends Component {
                         </thead>
                         <tbody>
                             {
-                                buyItems.map(item => {
+                                addNewItem.map(item => {
                                     return (
                                         <tr key={item}>
                                             <th scope="row">1</th>
@@ -78,12 +80,12 @@ class App extends Component {
 
 function mapStateToProps(state) {
     return {
-        buyItems: state.buyItems
+        buyItems: state.buyItem
     }
 }
 
-/* const mapActionsToProps = {
-    addAddNewItem
-} */
+const mapActionsToProps = {
+    AddNewItem
+}
 
 export default connect(mapStateToProps, mapActionsToProps)(App);

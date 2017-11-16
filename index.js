@@ -4,17 +4,26 @@ const bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser.json());
 
+//connecting to database
+var pg = require("pg");
 
-var database = require("./in-memory-database")();     //exported from contact-card fullstack
+var pool = new pg.Pool({
+    user: "postgres",
+    password: "welcome123",
+    host: "localhost",
+    port: 5432,
+    database: "shopping_list",
+    ssl: false
+});
 
 database.init([
     {
-    item: "cereal",
-    brand: "Froot Loops"
+    product: "cereal",
+    price: 4.5
 },
     {
-        item: "candy",
-        brand: "Crunch"
+        product: "candy",
+        price: 2.5
     }
 ]);
 
