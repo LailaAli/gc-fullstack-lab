@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import ShoppingCartItem from "./ShoppingCartItem";
+import AddItem from "./AddItem";
 
 class ShoppingCart extends Component {
   render() {
@@ -22,4 +24,13 @@ class ShoppingCart extends Component {
   }
 }
 
-export default ShoppingCart;
+function mapStateToProps(state) {
+    return {
+        items: state.items
+    }
+}
+
+export default connect(mapStateToProps, null)(ShoppingCart);
+//null means we are only mapping props not actions
+
+//shopping cart is the only thing that needs to access the global state.
