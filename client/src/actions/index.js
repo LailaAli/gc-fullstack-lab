@@ -1,4 +1,18 @@
-export function onItemUpdate(field, event) {
+export function addItem(item) {
+    return {
+        type: "ADD_ITEM",
+        item
+    }
+}
+
+
+
+
+
+
+
+
+/* export function onItemUpdate(field, event) {
     if (field === 'name') {
         this.setState({
             name: event.target.value
@@ -16,4 +30,4 @@ export function onItemUpdate(field, event) {
 //Add button function
 addItemBtn(event) {
     console.log('New Items: ' + JSON.stringify(this.state))
-}
+} */

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ShoppingCartItem from "./ShoppingCartItem";
-import AddItem from "./AddItem";
 
 class ShoppingCart extends Component {
   render() {
